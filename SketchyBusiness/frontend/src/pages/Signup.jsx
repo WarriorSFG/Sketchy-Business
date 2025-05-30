@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
+
 function SignUp() {
 
     const [BackendData, SetBackendData] = useState([{}])
@@ -13,11 +14,12 @@ function SignUp() {
             }
         )
     }, [])
+
     return (
         <section className="signup">
             <div className="signupform">
                 <h1 className="logintext">REGISTER</h1>
-                <form action="/register" method="post">
+                <form action="https://sketchy-business-backend.vercel.app/register" method="post">
                     <div>
                         <input type="text" placeholder="Username" className="input-field" id="username" name="username" />
                         <hr/>
