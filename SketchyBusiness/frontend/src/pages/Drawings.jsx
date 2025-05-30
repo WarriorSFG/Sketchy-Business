@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../card";
-import "./drawings.css";
+import "./Drawings.css";
 import UserLogged from "../UserLogged";
 
 function Drawings() {
