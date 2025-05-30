@@ -1,0 +1,14 @@
+.loggeduser{
+    width: 100%;
+    text-align: center;
+    font-size: 125%;
+    padding-top: 1vh;
+    gap:20px;
+}
+
+.button{
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: #2D2C31;
+    color: #F0EFEB;
+}

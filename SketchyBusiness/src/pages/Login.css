@@ -1,0 +1,52 @@
+.signup {
+    width: 100%;
+    height: 90vh;              
+    display: flex;
+    align-items: center;         
+    justify-content: center;     
+    text-align: center;
+}
+
+.signupform {
+    padding: 50px;
+    border: 1px solid ;
+    border-radius: 50px;
+    background-color: #2D2C31;
+    width: fit-content;
+    color: #F0EFEB;
+}
+
+
+.a{
+    cursor: pointer;
+    text-decoration: none;
+    color: #F0EFEB;
+}
+
+.logintext{
+    font-size: 200%;
+}
+
+.input-field{
+    color: #F0EFEB;
+    border: none;
+    background: transparent;
+  outline: none;
+
+}
+
+.input-field:active{
+    color: #F0EFEB;
+    border: none;
+    background: transparent;
+  outline: none;
+
+}
+
+.submitbutton{
+    border-radius: 10px;
+    text-decoration: none;
+    color: #2D2C31;
+    font-size: 125%;
+    
+}

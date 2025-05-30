@@ -1,0 +1,59 @@
+.Card {
+    background-color: #2d2c31;
+    text-align: center;
+    margin: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    border: 2px solid #F0EFEB;
+    border-radius: 10px;
+}
+.Card .content {
+    flex-grow: 1;
+}
+
+.Card .like-section {
+    margin-top: auto;
+}
+
+.Card img{
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+    border: 1px solid #F0EFEB;
+    border-radius: 10px;
+}
+
+.Card p{
+    max-width: 300px;
+    text-decoration: none;
+    color: #F0EFEB;
+}
+
+.Card h2{
+    text-decoration: none;
+    color: #F0EFEB;
+}
+
+.Card a{
+    cursor: pointer;
+    text-decoration: none;
+    color: #F0EFEB;
+}
+
+.Card button{
+    color: #F0EFEB;
+    padding: 0%;
+    margin: 0%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.Card like{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
