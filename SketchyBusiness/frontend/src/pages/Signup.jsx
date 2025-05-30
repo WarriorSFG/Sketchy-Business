@@ -5,7 +5,7 @@ function SignUp() {
     const [BackendData, SetBackendData] = useState([{}])
 
     useEffect(() => {
-        fetch("/register").then(
+        fetch("https://sketchy-business-backend.vercel.app/register").then(
             res => res.json()
         ).then(
             data => {

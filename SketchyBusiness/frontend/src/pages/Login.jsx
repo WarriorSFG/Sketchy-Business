@@ -9,7 +9,7 @@ function LoginPage() {
     const password = e.target.password.value;
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("https://sketchy-business-backend.vercel.app/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),

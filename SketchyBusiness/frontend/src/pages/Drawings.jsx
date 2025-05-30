@@ -7,7 +7,7 @@ function Drawings() {
     const [drawings, setDrawings] = useState([]);
 
     useEffect(() => {
-        fetch("/api/drawings")
+        fetch("https://sketchy-business-backend.vercel.app/api/drawings")
             .then(res => res.json())
             .then(data => setDrawings(data));
     }, []);

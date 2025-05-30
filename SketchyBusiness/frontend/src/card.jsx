@@ -8,7 +8,7 @@ function Card({id, title, description, date, initialLikes, user }) {
 
   const handleLikes = async () => {
     console.log("Sending like request for user:", user);
-    const res = await fetch(`/api/drawings/${id}/like`, {
+    const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/like`, {
       method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: user })
@@ -25,7 +25,7 @@ function Card({id, title, description, date, initialLikes, user }) {
     const getLikes = async () => {
       console.log("Retrieving like status for user:", user);
       try {
-        const res = await fetch(`/api/drawings/${id}/getlike`, {
+        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/getlike`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username: user })
