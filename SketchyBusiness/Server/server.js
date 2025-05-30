@@ -1,7 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
+const cors = require('cors')
 require('dotenv').config()
+
+app.use(cors({
+  origin: 'https://sketchy-business-frontend.vercel.app'
+}));
 
 const port = process.env.PORT
 const URL = process.env.MONGOURL
