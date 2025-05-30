@@ -1,4 +1,4 @@
-import './navbar.css';
+import './Navbar.css';
 import { Home, Pencil, KeyRound, Mail } from 'lucide-react';
 
 function Navbar(){

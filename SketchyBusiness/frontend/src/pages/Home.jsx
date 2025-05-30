@@ -1,5 +1,5 @@
 import UserLogged from "../UserLogged";
-import "./Home.css"
+import './Home.css'
 
 function Home() {
     return (<>

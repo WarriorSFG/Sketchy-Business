@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./login.css";
+import "./Login.css";
 function SignUp() {
 
     const [BackendData, SetBackendData] = useState([{}])

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Heart, HeartOff} from 'lucide-react';
-import "./card.css"
+import './Card.css'
 
 function Card({id, title, description, date, initialLikes, user }) {
   const [likes, setLikes] = useState(initialLikes);
