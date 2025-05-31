@@ -69,12 +69,75 @@ const drawingSchema = new mongoose.Schema({
   description: String,
   date: String,
   likes: { type: Number, default: 0 },
-  likedBy: [{ type: String }] 
+  likedBy: [{ type: String }],
+  comments: [
+    {
+      username: String,
+      text: String,
+      createdAt: { type: Date, default: Date.now }
+    }
+  ]
 });
 
 const Users = mongoose.model("data", userSchema)
 
 const Drawing = mongoose.model('Drawing', drawingSchema);
+
+// Get comments for a drawing
+app.get('/api/drawings/:id/comments', async (req, res) => {
+  const customId = Number(req.params.id);
+
+  try {
+    const drawing = await Drawing.findOne({ customId });
+    if (!drawing) return res.status(404).json({ error: "Drawing not found" });
+
+    res.json({ comments: drawing.comments || [] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/drawings/:id/comments', async (req, res) => {
+  const customId = Number(req.params.id);
+  const { username, text } = req.body;
+
+  if (!username || !text) {
+    return res.status(400).json({ error: "Username and text are required" });
+  }
+
+  try {
+    const drawing = await Drawing.findOne({ customId });
+    if (!drawing) return res.status(404).json({ error: "Drawing not found" });
+
+    drawing.comments.push({ username, text });
+    await drawing.save();
+
+    res.status(201).json({ message: "Comment added", comments: drawing.comments });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+app.get('/api/drawings/:id', async (req, res) => {
+  const customId = Number(req.params.id); 
+
+  try {
+    const drawing = await Drawing.findOne({ customId });
+
+    if (!drawing) {
+      return res.status(404).json({ error: "Drawing not found" });
+    }
+
+    res.json(drawing);
+  } catch (err) {
+    console.error("Error fetching drawing:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
 
 app.post('/api/drawings/:id/like', async (req, res) => {
   const { username } = req.body;

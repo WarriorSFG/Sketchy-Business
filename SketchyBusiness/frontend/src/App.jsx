@@ -5,12 +5,14 @@ import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import SignUp from './pages/Signup';
 import Register from './pages/Register';
+import DrawingDetail from "./pages/DrawingDetail";
 
 function App() {
   return(
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/drawing/:id" element={<DrawingDetail />} />
         <Route path="/home" element={<Home/>} />
         <Route path="/drawings" element={<Drawings />} />
         <Route path="/loginpage" element={<LoginPage />} />

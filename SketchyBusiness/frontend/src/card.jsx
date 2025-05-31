@@ -47,9 +47,9 @@ function Card({id, title, description, date, initialLikes, user }) {
     return (
         <div className="Card">
     <div className="content">
-        <a href={`/assets/Drawings/${id}.jpg`} target="_blank" rel="noopener noreferrer">
-            <img src={`/assets/Drawings/${id}.jpg`} alt={`drawing-${id}`} />
-        </a>
+        <a href={`/drawing/${id}`}>
+  <img src={`/assets/Drawings/${id}.jpg`} alt={`drawing-${id}`} />
+</a>
         <h2>{title}</h2>
         <p>{description}</p>
     </div>
