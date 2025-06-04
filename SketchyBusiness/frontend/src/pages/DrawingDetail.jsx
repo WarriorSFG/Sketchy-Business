@@ -28,7 +28,7 @@ function DrawingDetail() {
 
     const fetchComments = async () => {
       try {
-        const res = await fetch(`${BackendURL}/drawings/${id}/comments`);
+        const res = await fetch(`${BackendURL}/api/drawings/${id}/comments`);
         const data = await res.json();
         setComments(data.comments);
       } catch (err) {
@@ -45,7 +45,7 @@ function DrawingDetail() {
     if (!username.trim() || !commentText.trim()) return;
 
     try {
-      const res = await fetch(`${BackendURL}/drawings/${id}/comments`, {
+      const res = await fetch(`${BackendURL}/api/drawings/${id}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, text: commentText }),
