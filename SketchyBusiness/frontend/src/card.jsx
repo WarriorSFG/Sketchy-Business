@@ -38,6 +38,19 @@ function Card({ id, title, description, date, initialLikes, user }) {
     }
   };
 
+useEffect(() => {
+  const fetchViews = async () => {
+    try {
+      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`);
+      const data = await res.json();
+      setViews(data.views);
+    } catch (err) {
+      console.error("Error fetching views:", err);
+    }
+  };
+
+  fetchViews();
+}, [id]);
 
   useEffect(() => {
     const getLikes = async () => {
