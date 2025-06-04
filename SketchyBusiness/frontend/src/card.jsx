@@ -74,7 +74,7 @@ useEffect(() => {
         <p>{date}</p>
         <button onClick={handleLikes} className="button">
           {isLiked ? <HeartOff /> : <Heart color="red" />} {likes}
-        </button>
+        </button>&nbsp;&nbsp;
         <a href={`/drawing/${id}/#comments-section`} className="a-button">
           {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquareDiffIcon />} {comments}
         </a>
