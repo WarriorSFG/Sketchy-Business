@@ -23,24 +23,20 @@ function Card({ id, title, description, date, initialLikes, user }) {
 
   };
 
-  useEffect(() => {
-    const increaseViews = async () => {
-      try {
-        await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
+  const increaseViews = async () => {
+    try {
+      await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
 
-        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`);
-        const data = await res.json();
-        setViews(data.views);
-      } catch (err) {
-        console.error("Error updating/fetching views:", err);
-      }
-    };
-
-    increaseViews();
-  }, [id]);
+      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`);
+      const data = await res.json();
+      setViews(data.views);
+    } catch (err) {
+      console.error("Error updating/fetching views:", err);
+    }
+  };
 
 
   useEffect(() => {
@@ -84,9 +80,16 @@ function Card({ id, title, description, date, initialLikes, user }) {
   return (
     <div className="Card">
       <div className="content">
-        <a href={`/drawing/${id}` } onClick={increaseViews}>
-          <img src={`/assets/Drawings/${id}.jpg`} alt={`drawing-${id}`} />
-        </a>
+        <a
+  href={`/drawing/${id}`}
+  onClick={async (e) => {
+    e.preventDefault();               // stop instant navigation
+    await increaseViews();           // wait for the view to be counted
+    window.location.href = `/drawing/${id}`; // then redirect
+  }}
+>
+  <img src={`/assets/Drawings/${id}.jpg`} alt={`drawing-${id}`} />
+</a>
         <h2>{title}</h2>
         <p>{description}</p>
       </div>
@@ -96,9 +99,17 @@ function Card({ id, title, description, date, initialLikes, user }) {
         <button onClick={handleLikes} className="button">
           {isLiked ? <HeartOff /> : <Heart color="red" />} {likes}
         </button>&nbsp;&nbsp;
-        <a href={`/drawing/${id}/#comments-section`} onClick={increaseViews} className="a-button">
-          {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquare />} {comments}
-        </a>&nbsp;&nbsp;
+        <a
+  href={`/drawing/${id}/#comments-section`}
+  onClick={async (e) => {
+    e.preventDefault();
+    await increaseViews();
+    window.location.href = `/drawing/${id}/#comments-section`;
+  }}
+  className="a-button"
+>
+  {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquare />} {comments}
+</a>&nbsp;&nbsp;
         <a className="a-button">
           {<Eye />} {views}
         </a>
