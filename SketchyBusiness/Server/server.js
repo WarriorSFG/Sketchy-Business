@@ -69,6 +69,7 @@ const drawingSchema = new mongoose.Schema({
   description: String,
   date: String,
   likes: { type: Number, default: 0 },
+  views: { type: Number, default: 0 },
   likedBy: [{ type: String }],
   comments: [
     {
@@ -118,7 +119,33 @@ app.post('/api/drawings/:id/comments', async (req, res) => {
   }
 });
 
+app.get('/api/drawings/:id/views', async (req, res) => {
+  const customId = Number(req.params.id);
 
+  try {
+    const drawing = await Drawing.findOne({ customId });
+    if (!drawing) return res.status(404).json({ error: "Drawing not found" });
+
+    res.json({ views: drawing.views || [] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//increase views
+app.post('/api/drawings/:id/views', async (req, res) => {
+  const customId = Number(req.params.id);
+
+  try {
+    const drawing = await Drawing.findOne({ customId });
+    if (!drawing) return res.status(404).json({ error: "Drawing not found" });
+      drawing.views++;
+      await drawing.save();
+    res.status(201).json({"view":"Increased by 1."});
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.get('/api/drawings/:id', async (req, res) => {
   const customId = Number(req.params.id); 

@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Heart, HeartOff, MessageSquareQuoteIcon, MessageSquare } from 'lucide-react';
+import { Heart, HeartOff, MessageSquareQuoteIcon, MessageSquare, Eye } from 'lucide-react';
 import './Card.css'
 
 function Card({ id, title, description, date, initialLikes, user }) {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState(0);
+  const [views, setViews] = useState(0);
 
   const handleLikes = async () => {
     console.log("Sending like request for user:", user);
@@ -23,47 +24,67 @@ function Card({ id, title, description, date, initialLikes, user }) {
   };
 
   useEffect(() => {
-  const getLikes = async () => {
-    console.log("Retrieving like status for user:", user);
-    try {
-      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/getlike`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: user })
-      });
+    const increaseViews = async () => {
+      try {
+        await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
 
-      const data = await res.json();
-      setIsLiked(data.likedBy?.includes(user));
-    } catch (err) {
-      console.error("Error fetching like status:", err);
+        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/views`);
+        const data = await res.json();
+        setViews(data.views);
+      } catch (err) {
+        console.error("Error updating/fetching views:", err);
+      }
+    };
+
+    increaseViews();
+  }, [id]);
+
+
+  useEffect(() => {
+    const getLikes = async () => {
+      console.log("Retrieving like status for user:", user);
+      try {
+        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/getlike`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: user })
+        });
+
+        const data = await res.json();
+        setIsLiked(data.likedBy?.includes(user));
+      } catch (err) {
+        console.error("Error fetching like status:", err);
+      }
+    };
+
+    if (user) {
+      getLikes();
     }
-  };
+  }, [id, user]);
 
-  if (user) {
-    getLikes();
-  }
-}, [id, user]);
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/comments`);
+        const data = await res.json();
+        setComments(data.comments.length);
+      } catch (err) {
+        console.error("Error fetching comments:", err);
+      }
+    };
 
-useEffect(() => {
-  const fetchComments = async () => {
-    try {
-      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/comments`);
-      const data = await res.json();
-      setComments(data.comments.length);
-    } catch (err) {
-      console.error("Error fetching comments:", err);
-    }
-  };
-
-  fetchComments();
-}, [id]);
+    fetchComments();
+  }, [id]);
 
 
 
   return (
     <div className="Card">
       <div className="content">
-        <a href={`/drawing/${id}`}>
+        <a href={`/drawing/${id}` } onClick={increaseViews}>
           <img src={`/assets/Drawings/${id}.jpg`} alt={`drawing-${id}`} />
         </a>
         <h2>{title}</h2>
@@ -75,8 +96,11 @@ useEffect(() => {
         <button onClick={handleLikes} className="button">
           {isLiked ? <HeartOff /> : <Heart color="red" />} {likes}
         </button>&nbsp;&nbsp;
-        <a href={`/drawing/${id}/#comments-section`} className="a-button">
-          {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquare/>} {comments}
+        <a href={`/drawing/${id}/#comments-section`} onClick={increaseViews} className="a-button">
+          {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquare />} {comments}
+        </a>&nbsp;&nbsp;
+        <a className="a-button">
+          {<Eye />} {views}
         </a>
 
       </div>
