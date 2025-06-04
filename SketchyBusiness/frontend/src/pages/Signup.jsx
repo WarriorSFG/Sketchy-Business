@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Login.css";
+import BackendURL from "./URL";
 
 function SignUp() {
 
     const [BackendData, SetBackendData] = useState([{}])
 
     useEffect(() => {
-        fetch("https://sketchy-business-backend.vercel.app/register").then(
+        fetch(`${BackendURL}/register`).then(
             res => res.json()
         ).then(
             data => {
@@ -19,7 +20,7 @@ function SignUp() {
         <section className="signup">
             <div className="signupform">
                 <h1 className="logintext">REGISTER</h1>
-                <form action="https://sketchy-business-backend.vercel.app/register" method="post">
+                <form action={`${BackendURL}/register`} method="post">
                     <div>
                         <input type="text" placeholder="Username" className="input-field" id="username" name="username" />
                         <hr/>

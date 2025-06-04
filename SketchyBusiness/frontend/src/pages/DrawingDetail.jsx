@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './DrawingDetail.css';
+import BackendURL from './URL';
 
 function DrawingDetail() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ function DrawingDetail() {
   useEffect(() => {
     const fetchDrawing = async () => {
       try {
-        const response = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}`);
+        const response = await fetch(`${BackendURL}/api/drawings/${id}`);
         const text = await response.text();
         const data = JSON.parse(text);
         setDrawing(data);
@@ -27,7 +28,7 @@ function DrawingDetail() {
 
     const fetchComments = async () => {
       try {
-        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/comments`);
+        const res = await fetch(`${BackendURL}/drawings/${id}/comments`);
         const data = await res.json();
         setComments(data.comments);
       } catch (err) {
@@ -44,7 +45,7 @@ function DrawingDetail() {
     if (!username.trim() || !commentText.trim()) return;
 
     try {
-      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/comments`, {
+      const res = await fetch(`${BackendURL}/drawings/${id}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, text: commentText }),

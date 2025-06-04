@@ -9,9 +9,13 @@ app.use(express.json())
 app.use(express.static(__dirname))
 app.use(express.urlencoded({ extended: true }))
 
+
+//app.use(cors());
+
 app.use(cors({
   origin: 'https://sketchy-business-frontend.vercel.app'
 }));
+
 
 const port = process.env.PORT
 const URL = process.env.MONGOURL

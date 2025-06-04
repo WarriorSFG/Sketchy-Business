@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css"
+import BackendURL from "./URL";
 function LoginPage() {
   const [message, setMessage] = useState("");
 
@@ -9,7 +10,7 @@ function LoginPage() {
     const password = e.target.password.value;
 
     try {
-      const res = await fetch("https://sketchy-business-backend.vercel.app/api/login", {
+      const res = await fetch(`${BackendURL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
