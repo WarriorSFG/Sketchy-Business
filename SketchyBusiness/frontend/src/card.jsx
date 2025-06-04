@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, HeartOff, MessageSquareQuoteIcon, MessageSquareDiffIcon } from 'lucide-react';
+import { Heart, HeartOff, MessageSquareQuoteIcon, MessageSquare } from 'lucide-react';
 import './Card.css'
 
 function Card({ id, title, description, date, initialLikes, user }) {
@@ -76,7 +76,7 @@ useEffect(() => {
           {isLiked ? <HeartOff /> : <Heart color="red" />} {likes}
         </button>&nbsp;&nbsp;
         <a href={`/drawing/${id}/#comments-section`} className="a-button">
-          {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquareDiffIcon />} {comments}
+          {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquare/>} {comments}
         </a>
 
       </div>
