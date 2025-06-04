@@ -23,27 +23,41 @@ function Card({ id, title, description, date, initialLikes, user }) {
   };
 
   useEffect(() => {
-    // Call getLikes only once when component mounts
-    const getLikes = async () => {
-      console.log("Retrieving like status for user:", user);
-      try {
-        const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/getlike`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: user })
-        });
+  const getLikes = async () => {
+    console.log("Retrieving like status for user:", user);
+    try {
+      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/getlike`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: user })
+      });
 
-        const data = await res.json();
-        setIsLiked(data.likedBy?.includes(user));
-      } catch (err) {
-        console.error("Error fetching like status:", err);
-      }
-    };
-
-    if (user) {
-      getLikes();
+      const data = await res.json();
+      setIsLiked(data.likedBy?.includes(user));
+    } catch (err) {
+      console.error("Error fetching like status:", err);
     }
-  }, [id, user]);
+  };
+
+  if (user) {
+    getLikes();
+  }
+}, [id, user]);
+
+useEffect(() => {
+  const fetchComments = async () => {
+    try {
+      const res = await fetch(`https://sketchy-business-backend.vercel.app/api/drawings/${id}/comments`);
+      const data = await res.json();
+      setComments(data.comments.length);
+    } catch (err) {
+      console.error("Error fetching comments:", err);
+    }
+  };
+
+  fetchComments();
+}, [id]);
+
 
 
   return (
@@ -61,7 +75,7 @@ function Card({ id, title, description, date, initialLikes, user }) {
         <button onClick={handleLikes} className="button">
           {isLiked ? <HeartOff /> : <Heart color="red" />} {likes}
         </button>
-        <a href={`/drawing/${id}/#comments-section`} className="button">
+        <a href={`/drawing/${id}/#comments-section`} className="a-button">
           {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquareDiffIcon />} {comments}
         </a>
 
