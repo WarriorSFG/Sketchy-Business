@@ -74,7 +74,7 @@ function DrawingDetail() {
 
       <hr />
 
-      <section className="comments-section">
+      <section className="comments-section" id="comments-section">
         <h3>Comments</h3>
 
         <ul className="comments-list">
