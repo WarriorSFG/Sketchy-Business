@@ -4,6 +4,7 @@ import BackendURL from "./URL";
 function LoginPage() {
   const [message, setMessage] = useState("");
 
+  console.log("HELLO")
   const handleSubmit = async (e) => {
     e.preventDefault();
     const username = e.target.username.value;
