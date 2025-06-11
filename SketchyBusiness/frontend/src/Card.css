@@ -96,3 +96,22 @@
   filter: drop-shadow(0 0 2px #ffffff);
 
 }
+
+@media (max-width: 600px) {
+  .Card {
+    padding: 16px;
+    max-width: 90vw;
+  }
+
+  .Card p {
+    font-size: 0.9rem;
+  }
+
+  .drawing-name {
+    font-size: 1.1rem;
+  }
+
+  .icon-button {
+    font-size: 0.9rem;
+  }
+}
