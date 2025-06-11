@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './DrawingDetail.css';
 import BackendURL from './URL';
+import { Download } from 'lucide-react';
 
 function DrawingDetail() {
   const { id } = useParams();
@@ -67,8 +68,15 @@ function DrawingDetail() {
 
   return (
     <div className="drawing-detail">
-      <h2>{drawing.title}</h2>
+      <h2 className='Drawing-title'>{drawing.title}</h2>
       <img src={`/assets/Drawings/${drawing.customId}.jpg`} alt={drawing.title} className='img' />
+      <br/>
+      <div className='download-button-container'>
+      <a href={`/assets/Drawings/${drawing.customId}.jpg`} download="Drawing.png" className='a'>
+        <button className='download-button'><Download/>Download</button>
+      </a>
+
+      </div>
       <p><strong>Description:</strong> {drawing.description}</p>
       <p><strong>Date:</strong> {drawing.date}</p>
       <p><strong>Likes:</strong> {drawing.likes}</p>

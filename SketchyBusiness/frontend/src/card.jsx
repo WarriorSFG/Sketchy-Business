@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, HeartOff, MessageSquareQuoteIcon, MessageSquare, Eye } from 'lucide-react';
+import { Heart, MessageSquareQuoteIcon, MessageSquare, Eye } from 'lucide-react';
 import './Card.css'
 import BackendURL from "./pages/URL";
 
@@ -102,25 +102,25 @@ function Card({ id, title, description, date, initialLikes, user }) {
           }}>
           <img src={`/assets/Drawings/${id}.jpg`} alt={`drawing-${id}`} />
         </a>
-        <h2>{title}</h2>
+        <h2 className="drawing-name">{title}</h2>
         <p>{description}</p>
       </div>
 
       <div className="like-section">
         <p>{date}</p>
-        <button onClick={handleLikes} className="button">
-          {isLiked ? <HeartOff /> : <Heart color="red" />} {likes}
+        <button onClick={handleLikes} className="icon-button">
+          {isLiked ? <Heart fill="#E85A4F" color="#E85A4F"/> : <Heart color="#E85A4F" />} {likes}
         </button>&nbsp;&nbsp;
         <a href={`/drawing/${id}/#comments-section`} onClick={async (e) => {
           e.preventDefault();
           await increaseViews();
           window.location.href = `/drawing/${id}/#comments-section`;
-        }} className="a-button">
-          {comments > 0 ? <MessageSquareQuoteIcon /> : <MessageSquare />} {comments}
+        }} className="icon-button">
+          {comments > 0 ? <MessageSquareQuoteIcon color="#45B1E3"/> : <MessageSquare color="#45B1E3"/>} {comments}
         </a>&nbsp;&nbsp;
-        <a className="a-button">
+        <div className="icon-button">
           {<Eye />} {views}
-        </a>
+        </div>
 
       </div>
     </div>

@@ -5,10 +5,21 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    max-width: 200px;
-    border: 2px solid #F0EFEB;
-    border-radius: 10px;
+    max-width: 240px;
+    border: 5px solid #0F0F0F;
+    border-radius: 10px;  
+    font-family: "Share Tech", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
+
+.Card:hover{
+    background-color: #0F0F0F;
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(240, 239, 235, 0.2);
+}
+
 .Card .content {
     flex-grow: 1;
 }
@@ -21,20 +32,30 @@
     height: auto;
     width: 100%;
     object-fit: contain;
-    border: 1px solid #F0EFEB;
+    border: 5px solid #0F0F0F;
     border-radius: 10px;
 }
 
 .Card p{
+    
+  font-family: "Martian Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
     max-width: 300px;
     text-decoration: none;
     color: #F0EFEB;
 }
 
-.Card h2{
-    text-decoration: none;
+.drawing-name{
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
     color: #F0EFEB;
 }
+
 
 .Card a{
     cursor: pointer;
@@ -56,4 +77,22 @@
     bottom: 10px;
     left: 0;
     width: 100%;
+}
+
+.icon-button {
+  font-family: "Alegreya SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #F0EFEB;
+  text-decoration: none;
+}
+
+.icon-button:hover {
+  color: #ffffff;
+  filter: brightness(1.4);
+  filter: drop-shadow(0 0 2px #ffffff);
+
 }

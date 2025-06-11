@@ -1,9 +1,12 @@
 .loggeduser{
     width: 100%;
     text-align: center;
-    font-size: 125%;
+    font-size: 150%;
     padding-top: 1vh;
     gap:20px;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .button{
